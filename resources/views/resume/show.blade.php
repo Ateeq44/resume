@@ -4,7 +4,16 @@
 <a href="{{ url('/generate-pdf', $resume->id) }}" class="btn btn-success">Download</a>
 
 <div id="preview" class="row">
+    <div class="col-md-12">
+        <h2 class="fw-bold text-center" id="p_name">{{ $resume->full_name }}</h2>
+        <!-- OBJECTIVE -->
+        @if($resume->objective)
+        <div class="section px-3 py-4" id="sec_objective">
+            <p id="p_objective ">{{ $resume->objective }}</p>
+        </div>
+        @endif
 
+    </div>
     <!-- LEFT COLUMN -->
     <div class="left-col col-md-6">
         <h3>Contact</h3>
@@ -41,17 +50,7 @@
     <!-- RIGHT COLUMN -->
     <div class="right-col col-md-6">
 
-        <h2 class="fw-bold" id="p_name">{{ $resume->full_name }}</h2>
-        <h5 class="fw-bold" id="p_job_title">{{ $resume->job_title ?? '' }}</h5>
-
-        <!-- OBJECTIVE -->
-        @if($resume->objective)
-        <div class="section" id="sec_objective">
-            <h4>Objective</h4>
-            <p id="p_objective">{{ $resume->objective }}</p>
-        </div>
-        @endif
-
+        
         <!-- EDUCATION -->
         @if($resume->educations->count())
         <div class="section" id="sec_education">

@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>PDF Example</title>
+    <title>{{ $resume->full_name }}</title>
     
 </head>
 <body>
@@ -11,37 +11,50 @@
 
     <!-- ROW -->
     <div style="width:100%; clear:both;">
+        <h2 id="p_name" style="text-align: center; margin:0; font-size:20px; font-weight:bold;">
+            {{ $resume->full_name }}
+        </h2>
+
+        <!-- OBJECTIVE -->
+        @if($resume->objective)
+        <div class="section" id="sec_objective" style="margin-bottom:10px; padding: 20px 2px;">
+            <h4 style="margin:0 0 5px 0; font-size: 16px;">Objective</h4>
+            <p id="p_objective" style="margin:0;">{{ $resume->objective }}</p>
+        </div>
+        @endif
+    </div>
+    <div style="width:100%; clear:both;">
 
         <!-- LEFT COLUMN -->
         <div class="left-col" style="width:48%; float:left; padding:10px; box-sizing:border-box;">
 
-            <h3 style="margin:0 0 6px 0; font-size:16px;">Contact</h3>
+            <h4 style="margin:10px 0 5px 0; font-size: 16px; font-size: 16px;">Contact</h4>
             <p id="p_phone" style="margin:2px 0;">{{ $resume->phone }}</p>
             <p id="p_email" style="margin:2px 0;">{{ $resume->email }}</p>
             <p id="p_address" style="margin:2px 0 10px 0;">{{ $resume->address }}</p>
 
-            <h4 style="margin:10px 0 5px 0;">Skills</h4>
+            <h4 style="margin:10px 0 5px 0; font-size: 16px;">Skills</h4>
             <ul id="p_skills" style="margin:0; padding-left:15px;">
                 @foreach($resume->skills as $skill)
                     <li>{{ $skill->name }}</li>
                 @endforeach
             </ul>
 
-            <h4 style="margin:10px 0 5px 0;">Languages</h4>
+            <h4 style="margin:10px 0 5px 0; font-size: 16px;">Languages</h4>
             <ul id="p_languages" style="margin:0; padding-left:15px;">
                 @foreach($resume->language as $lang)
                     <li>{{ $lang->name }}</li>
                 @endforeach
             </ul>
 
-            <h4 style="margin:10px 0 5px 0;">Hobbies</h4>
+            <h4 style="margin:10px 0 5px 0; font-size: 16px;">Hobbies</h4>
             <ul id="p_interests" style="margin:0; padding-left:15px;">
                 @foreach($resume->interests as $interest)
                     <li>{{ $interest->name }}</li>
                 @endforeach
             </ul>
 
-            <h4 style="margin:10px 0 5px 0;">Reference</h4>
+            <h4 style="margin:10px 0 5px 0; font-size: 16px;">Reference</h4>
             <p style="margin:0;">Reference will be provided on demand</p>
 
         </div>
@@ -60,7 +73,7 @@
             <!-- OBJECTIVE -->
             @if($resume->objective)
             <div class="section" id="sec_objective" style="margin-bottom:10px;">
-                <h4 style="margin:0 0 5px 0;">Objective</h4>
+                <h4 style="margin:0 0 5px 0; font-size: 16px;">Objective</h4>
                 <p id="p_objective" style="margin:0;">{{ $resume->objective }}</p>
             </div>
             @endif
@@ -68,7 +81,7 @@
             <!-- EDUCATION -->
             @if($resume->educations->count())
             <div class="section" id="sec_education" style="margin-bottom:10px;">
-                <h4 style="margin:0 0 5px 0;">Education</h4>
+                <h4 style="margin:0 0 5px 0; font-size: 16px;">Education</h4>
 
                 <div id="p_education">
                     @foreach($resume->educations as $edu)
@@ -92,7 +105,7 @@
             <!-- EXPERIENCE -->
             @if($resume->experiences->count())
             <div class="section" id="sec_experience" style="margin-bottom:10px;">
-                <h4 style="margin:0 0 5px 0;">Work Experience</h4>
+                <h4 style="margin:0 0 5px 0; font-size: 16px;">Work Experience</h4>
 
                 <div id="p_experience">
                     @foreach($resume->experiences as $exp)
@@ -123,7 +136,7 @@
             <!-- CERTIFICATE -->
             @if($resume->certificate->count())
             <div class="section" style="margin-bottom:10px;">
-                <h4 style="margin:0 0 5px 0;">Certificate</h4>
+                <h4 style="margin:0 0 5px 0; font-size: 16px;">Certificate</h4>
 
                 <div>
                     @foreach($resume->certificate as $exp)
