@@ -1,0 +1,13 @@
+body{
+  font-family: "Roboto", sans-serif;
+}
+
+.bg-gradients-1{
+	background: #004AAD;
+	background: linear-gradient(120deg,rgba(0, 74, 173, 1) 0%, rgba(255, 117, 31, 1) 100%);
+}
+
+
+.logo{
+	width: 200px !important;
+}
