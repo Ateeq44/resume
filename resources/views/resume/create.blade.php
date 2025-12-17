@@ -4,6 +4,7 @@
     <!-- PERSONAL INFO -->
     @csrf
     <div class="card mb-4">
+        <input type="hidden" name="user_id" value="{{ Auth::id() }}">
         <div class="card-header fw-bold">Personal Information</div>
         <div class="card-body row g-3">
             <div class="col-md-6">

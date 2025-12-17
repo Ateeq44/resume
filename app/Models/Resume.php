@@ -23,4 +23,17 @@ class Resume extends Model
 	public function interests() {
 		return $this->hasMany(Interest::class);
 	}
+
+
+	public function language() {
+		return $this->hasMany(Languages::class);
+	}
+
+	public function skills() {
+		return $this->hasMany(Skills::class);
+	}
+
+	public function certificate() {
+		return $this->hasMany(Certificates::class);
+	}
 }

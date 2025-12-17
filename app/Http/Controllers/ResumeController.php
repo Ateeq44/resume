@@ -11,11 +11,18 @@ use App\Models\Interest;
 use App\Models\Skills;
 use App\Models\Certificates;
 use App\Models\Languages;
-
+use Illuminate\Support\Facades\Auth;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class ResumeController extends Controller
 {
 	public function index()
+	{
+		$resume = Resume::where('user_id', Auth::id())->latest()->get();
+		return view('dashboard', compact('resume'));
+	}
+
+	public function create()
 	{
 		return view('resume.create');
 	}
@@ -24,7 +31,7 @@ class ResumeController extends Controller
 	{
 		$resume = Resume::create($request->only([
 			'full_name','email','phone','address',
-			'objective'
+			'objective', 'user_id'
 		]));
 
         // EDUCATION
@@ -103,7 +110,18 @@ class ResumeController extends Controller
 
 	public function show($id)
 	{
-		$resume = Resume::with(['educations','experiences','interests'])->findOrFail($id);
+		$resume = Resume::with(['educations','experiences','interests', 'certificate','skills','language'])->findOrFail($id);
 		return view('resume.show', compact('resume'));
 	}
+
+	public function generatePDF($id)
+    {
+        $resume = Resume::with(['educations','experiences','interests', 'certificate','skills','language'])->findOrFail($id);
+
+        $pdf = PDF::loadView('pdf.cv', compact('resume'), ['pdf' => true])->setPaper('A4', 'portrait');
+
+        // Download PDF
+        return $pdf->download('cv.pdf');
+    }
+
 }

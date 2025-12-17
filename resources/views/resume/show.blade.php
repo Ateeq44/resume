@@ -1,6 +1,8 @@
 @extends('layouts.app')
 @section('content')
 
+<a href="{{ url('/generate-pdf', $resume->id) }}" class="btn btn-success">Download</a>
+
 <div id="preview" class="row">
 
     <!-- LEFT COLUMN -->
@@ -12,19 +14,15 @@
 
         <h4>Skills</h4>
         <ul id="p_skills">
-            @foreach(explode(',', $resume->skills ?? '') as $skill)
-                @if(trim($skill) != '')
-                    <li>{{ trim($skill) }}</li>
-                @endif
+            @foreach($resume->skills as $skill)
+                    <li>{{ $skill->name }}</li>
             @endforeach
         </ul>
 
         <h4>Languages</h4>
         <ul id="p_languages">
-            @foreach(explode(',', $resume->languages ?? '') as $lang)
-                @if(trim($lang) != '')
-                    <li>{{ trim($lang) }}</li>
-                @endif
+            @foreach($resume->language as $lang)
+                    <li>{{ $lang->name}}</li>
             @endforeach
         </ul>
 
@@ -34,6 +32,10 @@
                 <li>{{ $interest->name }}</li>
             @endforeach
         </ul>
+        <h4>Reference</h4>
+        <p>
+            Reference will be provided on demand
+        </p>
     </div>
 
     <!-- RIGHT COLUMN -->
@@ -47,33 +49,6 @@
         <div class="section" id="sec_objective">
             <h4>Objective</h4>
             <p id="p_objective">{{ $resume->objective }}</p>
-        </div>
-        @endif
-
-        <!-- EXPERIENCE -->
-        @if($resume->experiences->count())
-        <div class="section" id="sec_experience">
-            <h4>Work Experience</h4>
-            <div id="p_experience">
-                @foreach($resume->experiences as $exp)
-                    <div class="mb-3">
-                        <div style="display:flex; justify-content:space-between;">
-                            <strong>{{ $exp->title }}</strong>
-                            <span>
-                                {{ date('d-m-Y', strtotime($exp->start_date)) }} |
-                                {{ date('d-m-Y', strtotime($exp->end_date)) }} 
-                            </span>
-                        </div>
-                        <div><em>{{ $exp->company }}</em></div>
-
-                        @if($exp->description)
-                        <ul>
-                            <li>{{ $exp->description }}</li>
-                        </ul>
-                        @endif
-                    </div>
-                @endforeach
-            </div>
         </div>
         @endif
 
@@ -91,18 +66,60 @@
                                 {{ date('d-m-Y', strtotime($edu->end_date)) }} 
                             </span>
                         </div>
-                        <div><em>{{ $edu->institute }}</em></div>
+                        <div style="    font-weight: 500;">{{ $edu->institute }}</div>
                     </div>
                 @endforeach
             </div>
         </div>
         @endif
 
-        <!-- PROJECTS -->
-        @if($resume->projects)
-        <div class="section" id="sec_projects">
-            <h4>Projects</h4>
-            <p id="p_projects">{{ $resume->projects }}</p>
+        <!-- EXPERIENCE -->
+        @if($resume->experiences->count())
+        <div class="section" id="sec_experience">
+            <h4>Work Experience</h4>
+            <div id="p_experience">
+                @foreach($resume->experiences as $exp)
+                    <div class="mb-3">
+                        <div style="display:flex; justify-content:space-between;">
+                            <strong>{{ $exp->title }}</strong>
+                            <span>
+                                {{ date('d-m-Y', strtotime($exp->start_date)) }} |
+                                {{ date('d-m-Y', strtotime($exp->end_date)) }} 
+                            </span>
+                        </div>
+                        <div style="    font-weight: 500;">{{ $exp->company }}</div>
+
+                        @if($exp->description)
+                            <p>{{ $exp->description }}</p>
+                        @endif
+                    </div>
+                @endforeach
+            </div>
+        </div>
+        @endif
+
+        <!-- EXPERIENCE -->
+        @if($resume->experiences->count())
+        <div class="section" id="sec_experience">
+            <h4>Certificate</h4>
+            <div id="p_experience">
+                @foreach($resume->certificate as $exp)
+                    <div class="mb-3">
+                        <div style="display:flex; justify-content:space-between;">
+                            <strong>{{ $exp->title }}</strong>
+                            <span>
+                                {{ date('d-m-Y', strtotime($exp->start_date)) }} |
+                                {{ date('d-m-Y', strtotime($exp->end_date)) }} 
+                            </span>
+                        </div>
+                        <div style="font-weight: 500;">{{ $exp->institute }}</div>
+
+                        @if($exp->description)
+                            <p>{{ $exp->description }}</p>
+                        @endif
+                    </div>
+                @endforeach
+            </div>
         </div>
         @endif
 
