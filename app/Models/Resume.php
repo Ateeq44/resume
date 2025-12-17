@@ -9,7 +9,7 @@ class Resume extends Model
 	protected $table = 'resumes';
 	protected $fillable = [
 		'full_name','email','phone','address',
-		'objective','skills','projects','languages'
+		'objective', 'user_id'
 	];
 
 	public function educations() {
