@@ -36,10 +36,10 @@
 
 
 <!-- ================= CONTENT ================= -->
-<div style="padding:30px;">
+<div style="padding:30px; width: 100%;">
 
     <!-- LEFT COLUMN -->
-    <div style="width:65%; float:left; padding-right:25px; box-sizing:border-box;">
+    <div style="width:60%; float:left; box-sizing:border-box;">
 
         <!-- EXPERIENCE -->
         @if($resume->experiences->count())
@@ -124,6 +124,8 @@
 
     </div>
 
+    <!-- SPACE COLUMN (IMPORTANT) -->
+    <div style="width:5%; float:left;">&nbsp;</div>
 
     <!-- RIGHT COLUMN -->
     <div style="width:35%; float:right; box-sizing:border-box;">
