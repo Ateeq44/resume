@@ -1,176 +1,181 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <title>{{ $resume->full_name }}</title>
-    
 </head>
-<body>
+<body style="margin:0; padding:0; font-family:Arial, Helvetica, sans-serif;">
 
-<div id="preview" style="width:100%; font-family:DejaVu Sans, Arial, sans-serif; font-size:12px; color:#000;">
-
-    <!-- ROW -->
-    <div style="width:100%; clear:both;">
-        <h2 id="p_name" style="text-align: center; margin:0; font-size:20px; font-weight:bold;">
-            {{ $resume->full_name }}
-        </h2>
-
-        <!-- OBJECTIVE -->
-        @if($resume->objective)
-        <div class="section" id="sec_objective" style="margin-bottom:10px; padding: 20px 2px;">
-            <h4 style="margin:0 0 5px 0; font-size: 16px;">Objective</h4>
-            <p id="p_objective" style="margin:0;">{{ $resume->objective }}</p>
-        </div>
-        @endif
+<!-- HEADER -->
+<div style="padding:50px 40px;border:2px solid #b34cff;background:#0a2f7a;color:#ffffff;box-sizing:border-box;">
+    <div style="font-size:36px;text-align:center;font-weight:700;letter-spacing:2px;">
+        {{ $resume->full_name }}
     </div>
-    <div style="width:100%; clear:both;">
 
-        <!-- LEFT COLUMN -->
-        <div class="left-col" style="width:48%; float:left; padding:10px; box-sizing:border-box;">
+    <table width="100%" cellpadding="0" cellspacing="0" style="margin-top:25px;font-size:14px;">
+        <tr>
+            <td align="center">{{ $resume->phone }}</td>
+            <td align="center">{{ $resume->email }}</td>
+            <td align="center">{{ $resume->address }}</td>
+        </tr>
+    </table>
+</div>
 
-            <h4 style="margin:10px 0 5px 0; font-size: 16px; font-size: 16px;">Contact</h4>
-            <p id="p_phone" style="margin:2px 0;">{{ $resume->phone }}</p>
-            <p id="p_email" style="margin:2px 0;">{{ $resume->email }}</p>
-            <p id="p_address" style="margin:2px 0 10px 0;">{{ $resume->address }}</p>
+<!-- ABOUT / OBJECTIVE -->
+@if($resume->objective)
+<div style="margin:35px 30px;">
+    <div style="font-size:20px;font-weight:700;letter-spacing:2px;color:#333;margin-bottom:15px;">
+        About Me
+    </div>
+    <div style="font-size:14px;line-height:1.7;color:#888;">
+        {{ $resume->objective }}
+    </div>
+</div>
+@endif
 
-            <h4 style="margin:10px 0 5px 0; font-size: 16px;">Skills</h4>
-            <ul id="p_skills" style="margin:0; padding-left:15px;">
-                @foreach($resume->skills as $skill)
-                    <li>{{ $skill->name }}</li>
-                @endforeach
-            </ul>
+<!-- MAIN LAYOUT -->
+<table width="100%" cellspacing="0" cellpadding="0" style="padding:0 30px;">
+<tr>
 
-            <h4 style="margin:10px 0 5px 0; font-size: 16px;">Languages</h4>
-            <ul id="p_languages" style="margin:0; padding-left:15px;">
-                @foreach($resume->language as $lang)
-                    <li>{{ $lang->name }}</li>
-                @endforeach
-            </ul>
+<!-- LEFT COLUMN -->
+<td width="65%" valign="top" style="padding-right:30px;">
 
-            <h4 style="margin:10px 0 5px 0; font-size: 16px;">Hobbies</h4>
-            <ul id="p_interests" style="margin:0; padding-left:15px;">
-                @foreach($resume->interests as $interest)
-                    <li>{{ $interest->name }}</li>
-                @endforeach
-            </ul>
+<!-- EXPERIENCE -->
+@if($resume->experiences->count())
+<div style="margin-bottom:40px;">
+    <div style="font-size:20px;font-weight:700;letter-spacing:2px;color:#333;margin-bottom:20px;">
+        Experience
+    </div>
 
-            <h4 style="margin:10px 0 5px 0; font-size: 16px;">Reference</h4>
-            <p style="margin:0;">Reference will be provided on demand</p>
+    @foreach($resume->experiences as $exp)
+    <table width="100%" cellpadding="0" cellspacing="0">
+        <tr>
+            <td style="font-weight:700;color:#333;">{{ $exp->title }}</td>
+            <td align="right" style="color:#777;">
+                {{ date('Y', strtotime($exp->start_date)) }} –
+                {{ date('Y', strtotime($exp->end_date)) }}
+            </td>
+        </tr>
+    </table>
+    <div style="font-weight:600;margin:5px 0;">{{ $exp->company }}</div>
 
-        </div>
+    @if($exp->description)
+    <div style="font-size:14px;color:#888;line-height:1.6;margin-bottom:20px;">
+        {{ $exp->description }}
+    </div>
+    @endif
+    @endforeach
+</div>
+@endif
 
-        <!-- RIGHT COLUMN -->
-        <div class="right-col" style="width:48%; float:right; padding:10px; box-sizing:border-box;">
+<!-- EDUCATION -->
+@if($resume->educations->count())
+<div style="margin-bottom:40px;">
+    <div style="font-size:20px;font-weight:700;letter-spacing:2px;color:#333;margin-bottom:20px;">
+        Education
+    </div>
 
-            <h2 id="p_name" style="margin:0; font-size:20px; font-weight:bold;">
-                {{ $resume->full_name }}
-            </h2>
+    @foreach($resume->educations as $edu)
+    <table width="100%" style="margin-bottom:10px;">
+        <tr>
+            <td>
+                <div style="font-weight:700;">{{ $edu->degree }}</div>
+                <div style="color:#888;">{{ $edu->institute }}</div>
+            </td>
+            <td align="right" style="color:#777;">
+                {{ date('Y', strtotime($edu->start_date)) }} –
+                {{ date('Y', strtotime($edu->end_date)) }}
+            </td>
+        </tr>
+    </table>
+    @endforeach
+</div>
+@endif
 
-            <h5 id="p_job_title" style="margin:4px 0 12px 0; font-size:14px; font-weight:bold;">
-                {{ $resume->job_title ?? '' }}
-            </h5>
+<!-- CERTIFICATES -->
+@if($resume->certificate->count())
+<div style="margin-bottom:40px;">
+    <div style="font-size:20px;font-weight:700;letter-spacing:2px;color:#333;margin-bottom:20px;">
+        Certificates
+    </div>
 
-            <!-- OBJECTIVE -->
-            @if($resume->objective)
-            <div class="section" id="sec_objective" style="margin-bottom:10px;">
-                <h4 style="margin:0 0 5px 0; font-size: 16px;">Objective</h4>
-                <p id="p_objective" style="margin:0;">{{ $resume->objective }}</p>
-            </div>
-            @endif
+    @foreach($resume->certificate as $cert)
+    <table width="100%" style="margin-bottom:10px;">
+        <tr>
+            <td>
+                <div style="font-weight:700;">{{ $cert->title }}</div>
+                <div style="color:#888;">{{ $cert->institute }}</div>
+            </td>
+            <td align="right" style="color:#777;">
+                {{ date('Y', strtotime($cert->start_date)) }} –
+                {{ date('Y', strtotime($cert->end_date)) }}
+            </td>
+        </tr>
+    </table>
+    @endforeach
+</div>
+@endif
 
-            <!-- EDUCATION -->
-            @if($resume->educations->count())
-            <div class="section" id="sec_education" style="margin-bottom:10px;">
-                <h4 style="margin:0 0 5px 0; font-size: 16px;">Education</h4>
+</td>
 
-                <div id="p_education">
-                    @foreach($resume->educations as $edu)
-                        <div style="margin-bottom:8px;">
-                            <div>
-                                <strong>{{ $edu->degree }}</strong>
-                                <span style="float:right;">
-                                    {{ date('d-m-Y', strtotime($edu->start_date)) }} |
-                                    {{ date('d-m-Y', strtotime($edu->end_date)) }}
-                                </span>
-                            </div>
-                            <div style="clear:both; font-weight:500;">
-                                {{ $edu->institute }}
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-            @endif
+<!-- RIGHT COLUMN -->
+<td width="35%" valign="top">
 
-            <!-- EXPERIENCE -->
-            @if($resume->experiences->count())
-            <div class="section" id="sec_experience" style="margin-bottom:10px;">
-                <h4 style="margin:0 0 5px 0; font-size: 16px;">Work Experience</h4>
+<!-- SKILLS -->
+@if($resume->skills->count())
+<div style="margin-bottom:35px;">
+    <div style="font-size:20px;font-weight:700;letter-spacing:2px;color:#333;margin-bottom:15px;">
+        Skills
+    </div>
+    <ul style="padding-left:18px;font-size:14px;color:#777;line-height:1.9;">
+        @foreach($resume->skills as $skill)
+            <li>{{ $skill->name }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
 
-                <div id="p_experience">
-                    @foreach($resume->experiences as $exp)
-                        <div style="margin-bottom:8px;">
-                            <div>
-                                <strong>{{ $exp->title }}</strong>
-                                <span style="float:right;">
-                                    {{ date('d-m-Y', strtotime($exp->start_date)) }} |
-                                    {{ date('d-m-Y', strtotime($exp->end_date)) }}
-                                </span>
-                            </div>
+<!-- LANGUAGES -->
+@if($resume->language->count())
+<div style="margin-bottom:35px;">
+    <div style="font-size:20px;font-weight:700;letter-spacing:2px;color:#333;margin-bottom:15px;">
+        Language
+    </div>
+    <ul style="padding-left:18px;font-size:14px;color:#777;line-height:1.9;">
+        @foreach($resume->language as $lang)
+            <li>{{ $lang->name }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
 
-                            <div style="clear:both; font-weight:500;">
-                                {{ $exp->company }}
-                            </div>
+<!-- HOBBIES -->
+@if($resume->interests->count())
+<div style="margin-bottom:35px;">
+    <div style="font-size:20px;font-weight:700;letter-spacing:2px;color:#333;margin-bottom:15px;">
+        Hobbies / Interest
+    </div>
+    <ul style="padding-left:18px;font-size:14px;color:#777;line-height:1.9;">
+        @foreach($resume->interests as $interest)
+            <li>{{ $interest->name }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
 
-                            @if($exp->description)
-                                <p style="margin:3px 0 0 0;">
-                                    {{ $exp->description }}
-                                </p>
-                            @endif
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-            @endif
-
-            <!-- CERTIFICATE -->
-            @if($resume->certificate->count())
-            <div class="section" style="margin-bottom:10px;">
-                <h4 style="margin:0 0 5px 0; font-size: 16px;">Certificate</h4>
-
-                <div>
-                    @foreach($resume->certificate as $exp)
-                        <div style="margin-bottom:8px;">
-                            <div>
-                                <strong>{{ $exp->title }}</strong>
-                                <span style="float:right;">
-                                    {{ date('d-m-Y', strtotime($exp->start_date)) }} |
-                                    {{ date('d-m-Y', strtotime($exp->end_date)) }}
-                                </span>
-                            </div>
-
-                            <div style="clear:both; font-weight:500;">
-                                {{ $exp->institute }}
-                            </div>
-
-                            @if($exp->description)
-                                <p style="margin:3px 0 0 0;">
-                                    {{ $exp->description }}
-                                </p>
-                            @endif
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-            @endif
-
-        </div>
-
-        <div style="clear:both;"></div>
+<!-- REFERENCE -->
+<div>
+    <div style="font-size:20px;font-weight:700;letter-spacing:2px;color:#333;margin-bottom:12px;">
+        Reference
+    </div>
+    <div style="font-size:14px;font-weight:700;">
+        Reference will be provided on demand
     </div>
 </div>
 
-
+</td>
+</tr>
+</table>
 
 </body>
 </html>

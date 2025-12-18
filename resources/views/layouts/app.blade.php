@@ -118,6 +118,7 @@ $('#experience-wrapper').append(`
     <div class="col-md-6">
         <label class="small">End Date</label>
         <input type="date" name="experience_end_date[]" class="form-control">
+        <span style=" font-size: 12px; color: red; ">Leave empty if currently working.</span>
     </div>
     <div class="col-12">
         <textarea name="experience_description[]" class="form-control" placeholder="Job Description"></textarea>

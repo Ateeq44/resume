@@ -61,8 +61,8 @@
                         <div style="display:flex; justify-content:space-between;">
                             <strong>{{ $edu->degree }}</strong>
                             <span>
-                                {{ date('d-m-Y', strtotime($edu->start_date)) }} |
-                                {{ date('d-m-Y', strtotime($edu->end_date)) }} 
+                                {{ date('Y', strtotime($edu->start_date)) }} |
+                                {{ date('Y', strtotime($edu->end_date)) }} 
                             </span>
                         </div>
                         <div style="    font-weight: 500;">{{ $edu->institute }}</div>
@@ -81,12 +81,17 @@
                     <div class="mb-3">
                         <div style="display:flex; justify-content:space-between;">
                             <strong>{{ $exp->title }}</strong>
-                            <span>
-                                {{ date('d-m-Y', strtotime($exp->start_date)) }} |
-                                {{ date('d-m-Y', strtotime($exp->end_date)) }} 
-                            </span>
+                            <div>
+                                {{ date('Y', strtotime($exp->start_date)) }}    
+                                <span>|</span>    
+                                @if($exp->end_date)
+                                {{ date('Y', strtotime($exp->end_date)) }}
+                                @else
+                                present
+                                @endif
+                            </div>
                         </div>
-                        <div style="    font-weight: 500;">{{ $exp->company }}</div>
+                        <div style="font-weight: 500;">{{ $exp->company }}</div>
 
                         @if($exp->description)
                             <p>{{ $exp->description }}</p>
@@ -102,19 +107,20 @@
         <div class="section" id="sec_experience">
             <h4>Certificate</h4>
             <div id="p_experience">
-                @foreach($resume->certificate as $exp)
+                @foreach($resume->certificate as $certif)
                     <div class="mb-3">
                         <div style="display:flex; justify-content:space-between;">
-                            <strong>{{ $exp->title }}</strong>
-                            <span>
-                                {{ date('d-m-Y', strtotime($exp->start_date)) }} |
-                                {{ date('d-m-Y', strtotime($exp->end_date)) }} 
-                            </span>
+                            <strong>{{ $certif->title }}</strong>
+                            <div>
+                                {{ date('Y', strtotime($certif->start_date)) }}    
+                            <span>|</span>
+                                {{ date('Y', strtotime($certif->end_date)) }}
+                            </div>
                         </div>
-                        <div style="font-weight: 500;">{{ $exp->institute }}</div>
+                        <div style="font-weight: 500;">{{ $certif->institute }}</div>
 
-                        @if($exp->description)
-                            <p>{{ $exp->description }}</p>
+                        @if($certif->description)
+                            <p>{{ $certif->description }}</p>
                         @endif
                     </div>
                 @endforeach
