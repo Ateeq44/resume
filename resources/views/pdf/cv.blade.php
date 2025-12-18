@@ -6,6 +6,26 @@
 </head>
 <body style="margin:0; padding:0; font-family:Arial, Helvetica, sans-serif;">
 
+    <div style="padding:50px 40px;border:2px solid #b34cff;background:#0a2f7a;color:#ffffff;">
+        <div style="font-size:36px;text-align:center;font-weight:700;">
+            {{ $resume->full_name }}
+        </div>
+
+        <table width="100%" style="margin-top:25px;font-size:14px;">
+            <tr>
+                <td align="center">{{ $resume->phone }}</td>
+                <td align="center">{{ $resume->email }}</td>
+                <td align="center">{{ $resume->address }}</td>
+            </tr>
+        </table>
+    </div>
+
+    @if($resume->objective)
+    <div style="margin:25px 30px;">
+        <strong>About Me</strong>
+        <p>{{ $resume->objective }}</p>
+    </div>
+    @endif
 
 
     <!-- MAIN LAYOUT -->
@@ -32,6 +52,9 @@
                 @endif
             </td>
         </tr>
+    </table>
+    <table width="100%" cellspacing="0" cellpadding="0">
+
 
         <tr>
 
@@ -167,13 +190,15 @@
                         Reference
                     </div>
                     <div style="font-size:14px;">
-                        Reference will be provided on demand
-                    </div>
-                </div>
+                       <p>
+                           Reference will be provided on demand     
+                       </p> 
+                   </div>
+               </div>
 
-            </td>
-        </tr>
-    </table>
+           </td>
+       </tr>
+   </table>
 
 </body>
 </html>
