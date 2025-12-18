@@ -9,37 +9,30 @@
 
 
     <!-- MAIN LAYOUT -->
-    <table width="100%" cellspacing="0" cellpadding="0" style="padding:0 30px;">
+    <table width="100%" cellspacing="0" cellpadding="0">
         <tr>
-            <td>
-            <!-- HEADER -->
-            <div style="padding:50px 40px;border:2px solid #b34cff;background:#0a2f7a;color:#ffffff;box-sizing:border-box;">
-                <div style="font-size:36px;text-align:center;font-weight:700;letter-spacing:2px;">
-                    {{ $resume->full_name }}
-                </div>
+            <td colspan="2">
+                <!-- HEADER -->
+                <div style="padding:50px 40px;border:2px solid #b34cff;background:#0a2f7a;color:#ffffff;box-sizing:border-box;">
+                    <div style="font-size:36px;text-align:center;font-weight:700;letter-spacing:2px;">
+                        {{ $resume->full_name }}
+                    </div>
 
-                <table width="100%" cellpadding="0" cellspacing="0" style="margin-top:25px;font-size:14px;">
-                    <tr>
-                        <td align="center">{{ $resume->phone }}</td>
-                        <td align="center">{{ $resume->email }}</td>
-                        <td align="center">{{ $resume->address }}</td>
-                    </tr>
-                </table>
-            </div>
-
-            <!-- ABOUT / OBJECTIVE -->
-            @if($resume->objective)
-            <div style="margin:35px 30px;">
-                <div style="font-size:20px;font-weight:700;letter-spacing:2px;color:#333;margin-bottom:15px;">
-                    About Me
+                    <table width="100%" cellpadding="0" cellspacing="0" style="margin-top:25px;font-size:14px;">
+                        <tr>
+                            <td align="center">{{ $resume->phone }}</td>
+                            <td align="center">{{ $resume->email }}</td>
+                            <td align="center">{{ $resume->address }}</td>
+                        </tr>
+                    </table>
                 </div>
-                <div style="font-size:14px;line-height:1.7;color:#888;">
-                    {{ $resume->objective }}
-                </div>
-            </div>
-            @endif
+                <!-- ABOUT / OBJECTIVE --> 
+                @if($resume->objective) 
+                <div style="margin:35px 0px;"> <div style="font-size:20px;font-weight:700;letter-spacing:2px;color:#333;margin-bottom:15px;"> About Me </div> <div style="font-size:14px;line-height:1.7;color:#888;"> {{ $resume->objective }} </div> </div> 
+                @endif
             </td>
         </tr>
+
         <tr>
 
             <!-- LEFT COLUMN -->
@@ -173,7 +166,7 @@
                     <div style="font-size:20px;font-weight:700;letter-spacing:2px;color:#333;margin-bottom:12px;">
                         Reference
                     </div>
-                    <div style="font-size:14px;font-weight:700;">
+                    <div style="font-size:14px;">
                         Reference will be provided on demand
                     </div>
                 </div>
